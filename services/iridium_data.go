@@ -39,4 +39,6 @@ func HandleWebhook(w http.ResponseWriter, r *http.Request) {
 		Data:             &t.Data,
 	})
 
+	w.WriteHeader(http.StatusOK)
+
 }
