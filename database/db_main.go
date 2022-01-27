@@ -17,7 +17,7 @@ type DB struct {
 
 func Connect() *DB {
 
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://admin:admin@cluster0.ubxcq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"))
+	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://admin:@cluster0.ubxcq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"))
 	if err != nil {
 		log.Print(err)
 		log.Print("\nDB connection failed in database package")
@@ -59,4 +59,13 @@ func (db *DB) SendData(input *model.NewSpaceData) *model.SpaceData {
 		return nil
 	}
 	return data
+}
+
+// Disconnect to MongoDB - could use, on further inspection looks like mongo is good at closing itself
+func (db *DB) Disconnect() {
+	err := db.client.Disconnect(context.Background())
+	if err != nil {
+		log.Print(err)
+		log.Print("\nunable to disconnect from DB in database package\n")
+	}
 }

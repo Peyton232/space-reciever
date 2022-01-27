@@ -14,6 +14,7 @@ import (
 func HandleWebhook(w http.ResponseWriter, r *http.Request) {
 
 	var db = database.Connect()
+	defer db.Disconnect()
 	b, err := io.ReadAll(r.Body)
 	// b, err := ioutil.ReadAll(resp.Body)  Go.1.15 and earlier
 	if err != nil {
