@@ -41,8 +41,8 @@ func HandleWebhook(w http.ResponseWriter, r *http.Request) {
 
 	if mod != nil {
 		w.WriteHeader(http.StatusOK)
+	} else {
+		w.WriteHeader(http.StatusInternalServerError)
 	}
-
-	w.WriteHeader(http.StatusInternalServerError)
 
 }
