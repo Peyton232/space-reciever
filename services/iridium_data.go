@@ -28,7 +28,7 @@ func HandleWebhook(w http.ResponseWriter, r *http.Request) {
 
 	log.Println(t)
 
-	db.SendData(&model.NewSpaceData{
+	mod := db.SendData(&model.NewSpaceData{
 		Imei:             &t.Imei,
 		Serial:           &t.Serial,
 		Momsn:            &t.Momsn,
@@ -39,6 +39,10 @@ func HandleWebhook(w http.ResponseWriter, r *http.Request) {
 		Data:             &t.Data,
 	})
 
-	w.WriteHeader(http.StatusOK)
+	if mod != nil {
+		w.WriteHeader(http.StatusOK)
+	}
+
+	w.WriteHeader(http.StatusInternalServerError)
 
 }
