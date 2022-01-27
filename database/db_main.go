@@ -17,7 +17,7 @@ type DB struct {
 
 func Connect() *DB {
 
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://admin:@cluster0.ubxcq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"))
+	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://admin:admin@cluster0.ubxcq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"))
 	if err != nil {
 		log.Print(err)
 		log.Print("\nDB connection failed in database package")
